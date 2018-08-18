@@ -1,0 +1,2 @@
+in order for faces.py to work, images.zip needs to be extracted in the same folder as faces.py, that is the folders
+cropped_male/ and cropped_female and figures need to be in the same directory as faces.py.

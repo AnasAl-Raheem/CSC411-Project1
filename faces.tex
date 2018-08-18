@@ -1,0 +1,448 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Programming/Coding Assignment
+% LaTeX Template
+%
+% This template has been downloaded from:
+% http://www.latextemplates.com
+%
+% Original author:
+% Ted Pavlic (http://www.tedpavlic.com)
+%
+% Note:
+% The \lipsum[#] commands throughout this template generate dummy text
+% to fill the template out. These commands should all be removed when 
+% writing assignment content.
+%
+% This template uses a Perl script as an example snippet of code, most other
+% languages are also usable. Configure them in the "CODE INCLUSION 
+% CONFIGURATION" section.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass{article}
+
+\usepackage{fancyhdr} % Required for custom headers
+\usepackage{lastpage} % Required to determine the last page for the footer
+\usepackage{extramarks} % Required for headers and footers
+\usepackage[usenames,dvipsnames]{color} % Required for custom colors
+\usepackage{graphicx} % Required to insert images
+\usepackage{subcaption}
+\usepackage{listings} % Required for insertion of code
+\usepackage{courier} % Required for the courier font
+\usepackage{lipsum} % Used for inserting dummy 'Lorem ipsum' text into the template
+
+% Margins
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+
+\linespread{1.1} % Line spacing
+
+% Set up the header and footer
+\pagestyle{fancy}
+\lhead{\hmwkAuthorName} % Top left header
+\chead{\hmwkClass\ (\hmwkClassTime): \hmwkTitle} % Top center head
+%\rhead{\firstxmark} % Top right header
+\lfoot{\lastxmark} % Bottom left footer
+\cfoot{} % Bottom center footer
+\rfoot{Page\ \thepage\ of\ \protect\pageref{LastPage}} % Bottom right footer
+\renewcommand\headrulewidth{0.4pt} % Size of the header rule
+\renewcommand\footrulewidth{0.4pt} % Size of the footer rule
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs
+
+%----------------------------------------------------------------------------------------
+%	CODE INCLUSION CONFIGURATION
+%----------------------------------------------------------------------------------------
+
+\definecolor{MyDarkGreen}{rgb}{0.0,0.4,0.0} % This is the color used for comments
+\lstloadlanguages{Perl} % Load Perl syntax for listings, for a list of other languages supported see: ftp://ftp.tex.ac.uk/tex-archive/macros/latex/contrib/listings/listings.pdf
+\lstset{language=Perl, % Use Perl in this example
+        frame=single, % Single frame around code
+        basicstyle=\small\ttfamily, % Use small true type font
+        keywordstyle=[1]\color{Blue}\bf, % Perl functions bold and blue
+        keywordstyle=[2]\color{Purple}, % Perl function arguments purple
+        keywordstyle=[3]\color{Blue}\underbar, % Custom functions underlined and blue
+        identifierstyle=, % Nothing special about identifiers                                         
+        commentstyle=\usefont{T1}{pcr}{m}{sl}\color{MyDarkGreen}\small, % Comments small dark green courier font
+        stringstyle=\color{Purple}, % Strings are purple
+        showstringspaces=false, % Don't put marks in string spaces
+        tabsize=5, % 5 spaces per tab
+        %
+        % Put standard Perl functions not included in the default language here
+        morekeywords={rand},
+        %
+        % Put Perl function parameters here
+        morekeywords=[2]{on, off, interp},
+        %
+        % Put user defined functions here
+        morekeywords=[3]{test},
+       	%
+        morecomment=[l][\color{Blue}]{...}, % Line continuation (...) like blue comment
+        numbers=left, % Line numbers on left
+        firstnumber=1, % Line numbers start with line 1
+        numberstyle=\tiny\color{Blue}, % Line numbers are blue and small
+        stepnumber=5 % Line numbers go in steps of 5
+}
+
+% Creates a new command to include a perl script, the first parameter is the filename of the script (without .pl), the second parameter is the caption
+\newcommand{\perlscript}[2]{
+\begin{itemize}
+\item[]\lstinputlisting[caption=#2,label=#1]{#1.pl}
+\end{itemize}
+}
+
+%----------------------------------------------------------------------------------------
+%	DOCUMENT STRUCTURE COMMANDS
+%	Skip this unless you know what you're doing
+%----------------------------------------------------------------------------------------
+
+% Header and footer for when a page split occurs within a problem environment
+\newcommand{\enterProblemHeader}[1]{
+%\nobreak\extramarks{#1}{#1 continued on next page\ldots}\nobreak
+%\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak
+}
+
+% Header and footer for when a page split occurs between problem environments
+\newcommand{\exitProblemHeader}[1]{
+%\nobreak\extramarks{#1 (continued)}{#1 continued on next page\ldots}\nobreak
+%\nobreak\extramarks{#1}{}\nobreak
+}
+
+\setcounter{secnumdepth}{0} % Removes default section numbers
+\newcounter{homeworkPartCounter} % Creates a counter to keep track of the number of problems
+\setcounter{homeworkPartCounter}{0}
+
+\newcommand{\homeworkPartName}{}
+\newenvironment{homeworkPart}[1][Part \arabic{homeworkPartCounter}]{ % Makes a new environment called homeworkPart which takes 1 argument (custom name) but the default is "Problem #"
+\stepcounter{homeworkPartCounter} % Increase counter for number of problems
+\renewcommand{\homeworkPartName}{#1} % Assign \homeworkPartName the name of the problem
+\section{\homeworkPartName} % Make a section in the document with the custom problem count
+\enterProblemHeader{\homeworkPartName} % Header and footer within the environment
+}{
+\exitProblemHeader{\homeworkPartName} % Header and footer after the environment
+}
+
+\newcommand{\problemAnswer}[1]{ % Defines the problem answer command with the content as the only argument
+\noindent\framebox[\columnwidth][c]{\begin{minipage}{0.98\columnwidth}#1\end{minipage}} % Makes the box around the problem answer and puts the content inside
+}
+
+\newcommand{\homeworkSectionName}{}
+\newenvironment{homeworkSection}[1]{ % New environment for sections within homework problems, takes 1 argument - the name of the section
+\renewcommand{\homeworkSectionName}{#1} % Assign \homeworkSectionName to the name of the section from the environment argument
+\subsection{\homeworkSectionName} % Make a subsection with the custom name of the subsection
+\enterProblemHeader{\homeworkPartName\ [\homeworkSectionName]} % Header and footer within the environment
+}{
+\enterProblemHeader{\homeworkPartName} % Header and footer after the environment
+}
+
+%----------------------------------------------------------------------------------------
+%	NAME AND CLASS SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\hmwkTitle}{Project 1} % Assignment title
+\newcommand{\hmwkDueDate}{Monday,\ January\ 29,\ 2018} % Due date
+\newcommand{\hmwkClass}{CSC411} % Course/class
+\newcommand{\hmwkClassTime}{L5101} % Class/lecture time
+\newcommand{\hmwkAuthorName}{Anas Al-Raheem} % Your name
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\title{
+\vspace{2in}
+\textmd{\textbf{\hmwkClass:\ \hmwkTitle}}\\
+\normalsize\vspace{0.1in}\small{Due\ on\ \hmwkDueDate}\\
+\vspace{0.1in}
+\vspace{3in}
+}
+
+\author{\textbf{\hmwkAuthorName}}
+%\date{} % Insert date here if you want it to appear below your name
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+\maketitle
+\clearpage
+%----------------------------------------------------------------------------------------
+%	Part 1 & 2
+%----------------------------------------------------------------------------------------
+
+% To have just one problem per page, simply put a \clearpage after each problem
+
+\begin{homeworkPart}
+
+The data-set consists of about $1420$ images, $690$ for the $6$ actors and $730$ for the $6$ actresses. The images are cropped to
+$32\times 32$-pixel images using the provided bounding boxes to include just the faces and saved in grey-scale. For each actor there is a variety of faces; different angles as well as different ages, impressions, and lighting conditions, thus not all images can be aligned together for a given actor. Most of the images are cropped correctly by the given bounding boxes, those that were not cropped correctly, were duplicated, or were missing features (such as covered mouths) were added to a discard list (the list can be found in faces.py, I created this list as I noticed lower performance using some of those images), thus not used in the program. A few examples are below:
+
+
+\begin{figure*}[h!]
+    \begin{subfigure}{.23\textwidth}
+        \includegraphics[scale=0.55]{bracco3.jpg}
+        \label{fig:bracco}
+    \end{subfigure}
+    \begin{subfigure}{.23\textwidth}
+        \includegraphics[scale=0.215]{bracco4.jpg}
+        \label{fig:bracco}
+    \end{subfigure}
+    \begin{subfigure}{.24\textwidth}
+        \includegraphics[scale=1.15]{bracco33.jpg}
+        \label{fig:bracco}
+    \end{subfigure}
+    \begin{subfigure}{.1\textwidth}
+        \includegraphics[scale=0.65]{baldwin13.jpg}
+        \label{fig:baldwin}
+    \end{subfigure}
+    \caption{original images, displaying different face angles and different ages}
+    \label{fig:original}
+\end{figure*}
+
+\begin{figure*}[h!]
+    \begin{subfigure}{.14\textwidth}
+        \includegraphics[scale=2]{carell23.jpeg}
+        \label{fig:carell}
+    \end{subfigure}
+    \begin{subfigure}{.14\textwidth}
+        \includegraphics[scale=2]{hader12.jpg}
+        \label{fig:hader}
+    \end{subfigure}
+    \begin{subfigure}{.14\textwidth}
+        \includegraphics[scale=2]{radcliffe77.jpg}
+        \label{fig:radcliffe}
+    \end{subfigure}
+    \begin{subfigure}{.14\textwidth}
+        \includegraphics[scale=2]{ferrera70.jpg}
+        \label{fig:ferrera}
+    \end{subfigure}
+    \begin{subfigure}{.14\textwidth}
+        \includegraphics[scale=2]{harmon64.jpg}
+        \label{fig:harmon}
+    \end{subfigure}
+    \begin{subfigure}{.14\textwidth}
+        \includegraphics[scale=2]{drescher30.jpg}
+        \label{fig:drescher}
+    \end{subfigure}
+    \caption{grey-scale cropped images of faces}
+    \label{fig:cropped}
+\end{figure*}
+
+\end{homeworkPart}
+\begin{homeworkPart}
+
+Using $get\_images$ function, all the images for a given actor or actress are uploaded into a list then the list of images is shuffled three times. The shuffled list is split into three parts, the first is the test set, the second is the validation set, and the third is the training set. The size of each set is an argument provided when calling the function.
+
+\end{homeworkPart}
+\clearpage
+%----------------------------------------------------------------------------------------
+%	Part 3 & 4
+%----------------------------------------------------------------------------------------
+
+
+
+\begin{homeworkPart}
+
+Cost function: $ \sum_{i=1}^{m} ((\theta^{T} x) - y)^{2} $.\\
+The cost function value on the training set: $0.481838082244$ and on the validation set: $1.75691882777$\\
+Performance on training set, validation set: $100.0\%$ and $90.0\%$.\\
+For each image i, the following code was used to determine the label of the image, 1 for baldwin and 0 for carell.
+\begin{verbatim}
+np.dot(theta1, i.T) > 0.5 // baldwin images, expected output is True
+np.dot(theta1, i.T) < 0.5 // carell images, expected output is True
+\end{verbatim}
+In order for the program to work, I tried different alpha values, for alpha values that are too large I would get an over flow error. Using lower values with too many iterations, I noticed the cost function value starts to increase after some point. And when trying alpha values that are too small, the program would have poor performance if the number of iterations is not increased, which increased the run time greatly. Trying different alpha values I selected the current one based on the time it takes to minimize the function as well as increase the performance of the program with the resulted theta. I also noticed starting theta0 with all values as $0.1$ improved the performance faster, i.e with less iterations.
+
+\end{homeworkPart}
+
+\begin{homeworkPart}
+
+A):\\
+The theta images obtained by running the program on the full training set and on only 2 images per actor:
+
+\begin{figure*}[h!]
+    \begin{subfigure}{.45\textwidth}
+        \centering
+        \includegraphics[scale=2.5]{part4_a_dots_on_full_set.jpg}
+        \caption{running on full training set}
+        \label{fig:running on full training set}
+    \end{subfigure}
+    \begin{subfigure}{.45\textwidth}
+        \centering
+        \includegraphics[scale=2.5]{part4_a_face_on_2.jpg}
+        \caption{running on 2 images per actor}
+        \label{fig:running on 2 images per actor}
+    \end{subfigure}
+    \caption{theta images}
+\end{figure*}
+
+B):\\
+The theta images representing a face and random dots by running the program on the full training set:\\
+For this part I noticed that stopping after only 5000 iteration the resulted theta is not a recognizable face, and stopping after 10 iterations would result in a face as seen below:
+
+\begin{figure*}[h!]
+    \begin{subfigure}{.45\textwidth}
+        \centering
+        \includegraphics[scale=2.5]{part4_b_dots_on_full_set.jpg}
+        \caption{running on full training set, stopping after 5000 iteration}
+        \label{fig:running on full training set, stopping after 5000 iteration}
+    \end{subfigure}
+    \begin{subfigure}{.45\textwidth}
+        \centering
+        \includegraphics[scale=2.5]{part4_b_face_on_full_set.jpg}
+        \caption{running on full training set, stopping after 10 iteration}
+        \label{fig:running on full training set, stopping after 10 iteration}
+    \end{subfigure}
+    \caption{theta images}
+\end{figure*}
+
+\end{homeworkPart}
+
+\clearpage
+%----------------------------------------------------------------------------------------
+%	Part 5 & 6
+%----------------------------------------------------------------------------------------
+
+\begin{homeworkPart}
+
+For this part, I ran the program, repeatedly on a changing size training set. Starting from 1 image per actor, to the minimum number of training images any actor has (the minimum is gilpin which has only 68 images for training). For each size I plot the performance of the resulted theta on the training set, validation set (of size 10), and a validation set for the 6 actors not in the given list act (50 images each). We can see in the graph below, how the performance on the training set is always $100\%$ representing overfitting, and how it is always less on the validation sets.
+
+\begin{figure*}[h!]
+    \includegraphics[scale=1]{part5_plot.jpg}
+    \caption{performance of classifiers}
+    \label{fig:performance of classifiers}
+\end{figure*}
+
+\end{homeworkPart}
+
+\begin{homeworkPart}
+
+A):\\
+By looking at the cost function j, we see that for any given i we have the following:\\
+$\sum_{j=1}^{k} ((\theta^{T} x^{i}) - y^{i})^{2} = ((\theta^{T}_{0} x^{i}) - y^{i}_{0})^{2} + ((\theta^{T}_{1} x^{i}) - y^{i}_{1})^{2} + ... + ((\theta^{T}_{k} x^{i}) - y^{i}_{k})^{2} $\\
+Thus for $i = p$ and $j = q$, we have:\\
+$((\theta^{T}_{0} x^{p}) - y^{p}_{0})^{2} + ((\theta^{T}_{2} x^{p}) - y^{p}_{1})^{2} + ... + ((\theta^{T}_{q} x^{p}) - y^{p}_{q})^{2}  + ... + ((\theta^{T}_{k} x^{p}) - y^{p}_{k})^{2}$ \\
+So the derivative of $\theta_{pq}$:\\
+$((\theta^{T}_{q} x^{p}) - y^{p}_{q})^{2} \frac{dj}{d\theta_{pq}}  = 2 ((\theta^{T}_{q} x^{p}) - y^{p}_{q}) (((\theta^{T}_{q} x^{p}) - y^{p}_{q}) \frac{dj}{d\theta_{pq}}) = 2 x^{p} ((\theta^{T}_{q} x^{p}) - y^{p}_{q})$.\\
+We see that  $\frac{dj}{d\theta_{pq}}$ for all other components at i = p will be 0 and similarly for all the components of sums at other i values.\\
+Thus $\frac{dj}{d\theta_{pq}} = 2 ((\theta^{T}_{q} x^{p}) - y^{i}_{1}) x^{p}$\\
+
+B):\\
+As shown in part A, for i = p we have:\\
+$((\theta^{T}_{0} x^{p}) - y^{p}_{0})^{2} + ((\theta^{T}_{1} x^{p}) - y^{p}_{1})^{2} + ... + ((\theta^{T}_{k} x^{p}) - y^{p}_{k})^{2} $\\
+if we take the derivative of each component of the sum, we will have:\\
+$(2 x^{p}((\theta^{T}_{0} x^{p}) - y^{p}_{0})) + (2 x^{p}((\theta^{T}_{1} x^{p}) - y^{p}_{1})) + ... + (2 x^{p}((\theta^{T}_{k} x^{p}) - y^{p}_{k})) $\\
+we see that each component starts with $2 x^{p}$ thus we can take it out of the sum:\\
+$ 2 x^{p} (((\theta^{T}_{0} x^{p}) - y^{p}_{0}) + ((\theta^{T}_{1} x^{p}) - y^{p}_{1}) + ... + ((\theta^{T}_{k} x^{p}) - y^{p}_{k}))$\\
+We notice that the sum above can be written as a matrix multiplication:\\
+$2 x^{p} (\theta^T x^{p} - Y^{p})$, where $\theta$ here is a $n \times k$ matrix and $x^{p}$ is $n \times 1$, $Y^{p}$ is a $k \times 1$ matrix.\\
+We can generalize this result for all i, the sum over all values of i is:\\
+$( 2 x^{0} (\theta^T x^{0} - Y^{0}) + 2 x^{1} (\theta^T x^{1} - Y^{1}) + ... + 2 x^{m} (\theta^T x^{m} - Y^{m}) )$\\
+We can see that the above sum can be re written as matrix multiplication:\\
+$ 2 X (\theta^T X - Y)^{T}$, where X is a $n \times m$ matrix, $\theta$ is a $n \times k$ matrix, and $Y$ is a $k \times m$ matrix.\\
+m is the number of training examples, n is the number of pixels + 1, k is the number of labels.\\
+
+C):\\
+The cost function j, and it's derivative:
+\begin{verbatim}
+def j(x, y, theta):
+    return np.sum(np.sum((np.dot(theta.T, x) - y)**2, 0))
+
+def dj(x, y, theta):
+    return 2. * np.dot(x, (np.dot(theta.T, x) - y).T)
+\end{verbatim}
+
+D):\\
+The code below, calculates the finite difference when changing an entry in theta. If the difference is less than $10^{-2}$ we consider the 2 numbers identical, and thus the correctness of the function and the derivative.
+\begin{verbatim}
+def test_functions(x, y, theta):
+
+    results = []
+    h = 1e-5
+    for i in range(5):
+        theta1 = theta.copy()
+        theta2 = theta.copy()
+        theta2[i, i] = theta1[i, i] + h
+
+        result1 = (j(x, y, theta2) - j(x, y, theta1)) / (h)
+        result2 = dj(x, y, theta1)
+        results.append(abs(result1 == result2[i, i]) < 1e-2)
+        # results.append((result1, result2[i, i]))
+
+    return results
+\end{verbatim}
+
+I tried using different h values and noticed that larger values cause the finite difference to increase up to $10^{2}$, and for smaller h values the finite difference between f(x + h) and f (x) will be unnoticeable which results in f(x + h) - f(x) = 0. Thus I selected the smallest possible h value that produced actual results.
+
+\end{homeworkPart}
+\clearpage
+
+%----------------------------------------------------------------------------------------
+%	Part 7 & 8
+%----------------------------------------------------------------------------------------
+
+\begin{homeworkPart}
+
+Performance on training set: $94.0\%$, and validation set: $81.6666666667\%$.\\
+For this part I tried different values for alpha and also different number of iterations. For a larger alpha or simply increasing iteration limit (up to 300,000) the cost function result was further reduced but the performance for certain actors would decrease as well while improve greatly for others. Thus by trying different alpha values I decided on the one I am currently using as it seemed to produce the best overall performance and with a short running time. Also initiating theta with 0.001 seemed to improve performance further, rather than starting with a greater value or randomly setting the values.\\
+For each image the result is an array of k = 6 elements, by getting the index i of the highest value in the array we can get the label, where the label is act[i].\\
+
+\end{homeworkPart}
+
+\begin{homeworkPart}
+
+\begin{figure*}[h!]
+    \begin{subfigure}{.25\textwidth}
+        \centering
+        \includegraphics[scale=2.5]{part8_bracco.jpg}
+        \caption{bracco}
+        \label{fig:bracco}
+    \end{subfigure}
+    \begin{subfigure}{.25\textwidth}
+        \centering
+        \includegraphics[scale=2.5]{part8_gilpin.jpg}
+        \caption{gilpin}
+        \label{fig:gilpin}
+    \end{subfigure}
+    \begin{subfigure}{.25\textwidth}
+        \centering
+        \includegraphics[scale=2.5]{part8_harmon.jpg}
+        \caption{harmon}
+        \label{fig:harmon}
+    \end{subfigure}
+    \begin{subfigure}{.25\textwidth}
+        \centering
+        \includegraphics[scale=2.5]{part8_baldwin.jpg}
+        \caption{baldwin}
+        \label{fig:baldwin}
+    \end{subfigure}
+    \begin{subfigure}{.485\textwidth}
+        \centering
+        \includegraphics[scale=2.5]{part8_hader.jpg}
+        \caption{hader}
+        \label{fig:hader}
+    \end{subfigure}
+    \begin{subfigure}{.25\textwidth}
+        \centering
+        \includegraphics[scale=2.5]{part8_carell.jpg}
+        \caption{carell}
+        \label{fig:carell}
+    \end{subfigure}
+    \caption{theta images}
+\end{figure*}
+
+\end{homeworkPart}
+
+\clearpage
+
+%----------------------------------------------------------------------------------------
+
+\end{document}
